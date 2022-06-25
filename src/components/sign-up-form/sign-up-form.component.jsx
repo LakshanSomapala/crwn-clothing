@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.util";
+import { UserContex  } from "../../contexts/user.context";
 import FormInputs from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import './sign-up-form.styles.scss'
@@ -14,9 +15,7 @@ const defaultFormField = {
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormField);
     const { displayName, email, password, confirmPassword } = formFields;
-
-    console.log(formFields);
-
+    
     const refreshFormField = () => {
         setFormFields(defaultFormField);
     }
