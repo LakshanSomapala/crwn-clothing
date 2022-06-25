@@ -14,14 +14,14 @@ export const UserProider = ({ children }) => {
     // signOutUser()
 
     useEffect(() => {
-        const ee = onAuthStateChangedListner((user) => {
+        const unsubscribe = onAuthStateChangedListner((user) => {
             console.log(user);
             if(user)
                 createUserDocumentFromAuth(user); // if user comes crate record
             setCurrentUser(user); // set user when user signs up or signs out. so we dont need to assign user anywhere in the code but here. this will give performance boost as well by needlessly running some functions in sign-in and sign-up components.
         });
 
-        return ee;
+        return unsubscribe;
     }, []); // only mount when only instantiate user context (only component mount). this will unmount using return value
 
 
