@@ -5,6 +5,8 @@ import './navigation.styles.scss'
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg'
 import { UserContex } from "../../contexts/user.context";
 import { signOutUser } from '../../utils/firebase/firebase.util'
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 const Navigation = () => {
     const { currentUser } = useContext(UserContex); //get the current user value
@@ -30,7 +32,9 @@ const Navigation = () => {
                             </Link>
                         )
                     }
+                    <CartIcon></CartIcon>
                 </div>
+                <CartDropdown></CartDropdown>
             </div>
             <Outlet />
         </Fragment>
