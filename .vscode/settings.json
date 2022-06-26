@@ -1,5 +1,5 @@
 {
     "html.format.wrapAttributes": "force",
     "html.format.indentHandlebars": true,
-    "html.format.indentInnerHtml": true
+    "html.format.indentInnerHtml": true,
 }
