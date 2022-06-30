@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+import { getFirestore, doc, setDoc, getDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCLWEX7GVgKvaldSGiRQLjZj7-Z2AIogDM",
@@ -25,6 +25,34 @@ export const auth = getAuth();
 export const SignInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
+
+//add data to db using shopdata.js file. Only need to calll one time only to create table in db
+// export const addCollectionAndDocument = async (collectionName, objectToAdd) => {
+//     const collectionRef = collection(db, collectionName);
+//     const batch = writeBatch(db)
+
+//     objectToAdd.forEach((object) => {
+//         const docRef =  doc(collectionRef, object.title.toLowerCase())
+//         batch.set(docRef,object);
+//     });
+
+//     await batch.commit();
+// }
+
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'category')
+    const q = query(collectionRef)
+
+    const querySnapshot = await getDocs(q) //return all the docs (tables ) under category
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => { //docSnapshot is the table inside the categoty collection
+        const {items, title} = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {})
+
+    return categoryMap;
+}
+
 
 //create user table or doc
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
