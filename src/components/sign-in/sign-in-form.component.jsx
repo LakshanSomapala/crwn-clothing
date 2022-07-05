@@ -1,10 +1,16 @@
 import { useState, useContext } from "react";
+import { useDispatch } from "react-redux";
+
+import {
+	googleSignInStart,
+	emailSignInStart,
+} from "../../store/user/user-action";
 import {
 	SignInWithGooglePopup,
-	createUserDocumentFromAuth,
+	// createUserDocumentFromAuth,
 	signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.util";
-import { UserContex } from "../../contexts/user.context";
+// import { UserContex } from "../../contexts/user.context";
 import FormInputs from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import "./sign-in-form.styles.scss";
@@ -15,11 +21,15 @@ const defaultFormField = {
 };
 
 const SignInForm = () => {
+	const dispatch = useDispatch();
 	const [formFields, setFormFields] = useState(defaultFormField);
 	const { email, password } = formFields;
 
 	const signInWithGoogle = async () => {
-		await SignInWithGooglePopup();
+		// await SignInWithGooglePopup();
+
+		//For Saga
+		dispatch(googleSignInStart());
 	};
 
 	const refreshFormField = () => {
@@ -30,10 +40,10 @@ const SignInForm = () => {
 		event.preventDefault();
 
 		try {
-			const { user } = await signInAuthUserWithEmailAndPassword(
-				email,
-				password
-			);
+			// await signInAuthUserWithEmailAndPassword(email, password);
+
+			//For Saga
+			dispatch(emailSignInStart(email, password));
 			refreshFormField();
 		} catch (error) {
 			switch (error.code) {
