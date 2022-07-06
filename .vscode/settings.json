@@ -3,4 +3,8 @@
     "html.format.indentHandlebars": true,
     "html.format.indentInnerHtml": true,
     "prettier.useTabs": true,
+    "eslint.alwaysShowStatus": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
