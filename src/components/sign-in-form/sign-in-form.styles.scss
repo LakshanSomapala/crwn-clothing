@@ -1,14 +1,14 @@
-.sign-up-container {
-    display: block;
-    flex-direction: column;
-    width: 380px;
+.sign-in-container {
+	display: block;
+	flex-direction: column;
+	width: 380px;
 
-    h2 {
-        margin: 10px 0;
-    } 
+	h2 {
+		margin: 10px 0;
+	}
 }
 
 .buttons-container {
-    display: flex;
-    justify-content: space-between; 
+	display: flex;
+	justify-content: space-between;
 }
