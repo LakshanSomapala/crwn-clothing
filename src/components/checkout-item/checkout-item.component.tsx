@@ -53,7 +53,7 @@
 
 //For TS
 // import { useContext } from "react";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // import { CartContext } from "../../contexts/cart.context";
@@ -71,7 +71,7 @@ type CheckoutItemProps = {
 	cartItem: CartItems;
 };
 
-const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
+const CheckoutItem: FC<CheckoutItemProps> = memo(({ cartItem }) => {
 	const { name, imageUrl, price, quantity } = cartItem;
 	// const { clearItemFromCart, addItemsToCart, remoceItemFromCart } =
 	// 	useContext(CartContext);
@@ -107,6 +107,6 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
 			</span>
 		</div>
 	);
-};
+});
 
 export default CheckoutItem;
